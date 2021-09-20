@@ -104,13 +104,12 @@ class Dice(pygame.sprite.Sprite):
     "Dice class mainly for GUI purpose"
     current = 1
     rolling = -1
-    finish = turn = None
+    finish = None
     
     def __init__(self, turn):
         super().__init__()
 
         self.images = [pygame.transform.scale(pygame.image.load(f"images/dice{i}.png"), DICE_SIZE) for i in range(1, 7)]
-
         self.turn = turn
         self.draw(self.images[0], turn)
         self.rect = self.image.get_rect(center=DICE_POS)
@@ -126,7 +125,7 @@ class Dice(pygame.sprite.Sprite):
 
     def update(self):
         "Handle animation logic here (rolls for 36 frames)"
-        if -1 < self.rolling < 66:
+        if -1 < self.rolling < 36:
             self.draw(self.images[(self.rolling//4)%6], self.turn)
             self.rolling += 1
         elif self.rolling == 36:
@@ -343,7 +342,7 @@ class Board:
         return self.center[0] + triangles[index][0] * TILEX * 1.5, self.center[1] + triangles[index][1] * TILEY * 1.5
         
 
-class Game(object):
+class Game:
     "Main game class, handles player selection GUI as well as handling user inputs (dice, piece)"
     players = [RED, GREEN, YELLOW, BLUE]
     AI = humans = []
@@ -353,7 +352,6 @@ class Game(object):
     turn = 0
 
     def __init__(self):
-        super().__init__()
         pygame.init()
 
         self.screen = pygame.display.set_mode((SCREENX, SCREENY))
