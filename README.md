@@ -3,6 +3,8 @@
 Ludo is a strategy board game for two to four players, in which the players race their four tokens from start to finish
 in a clockwise order according to the rolls of a single die.
 
+Here you can play with upto 4 humans or AI
+
 ## Installation
 1. Open command prompt (cmd)
 2. Type `pip3 install pygame` or `pip install pygame`
